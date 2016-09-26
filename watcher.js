@@ -5,8 +5,6 @@ Notification.requestPermission(function (permission) {
     }
 });
 
-console.log("Bøhh");
-
 var url = location.href;
 
 // Check that we are on a forum index page. 
