@@ -43,6 +43,7 @@ if (index === 0) {
             notification.onclick = function () {
                 window.focus();
                 location.href = newMessage;
+                notification.close();
             }
         }
     }
