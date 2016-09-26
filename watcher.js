@@ -1,21 +1,11 @@
-chrome.tabs.executeScript({ code: "console.log('dsff');" }, function() {
-    if (chrome.runtime.lastError) {
-        console.log("ERROR: " + chrome.runtime.lastError.message);
-    }
-});
-
-chrome.tabs.onUpdated.addListener(
-    function ( tabId, changeInfo, tab )
-    {
-        if ( changeInfo.status === "complete" )
-        {
-            chrome.tabs.executeScript({
-                code: `// Request permission to show notifications
+// Request permission to show notifications
 Notification.requestPermission(function (permission) {
     if (permission !== 'granted') {
         alert('To use the watcher plugin, you have to allow notifications. Refresh the page to try again.');
     }
 });
+
+console.log("Bøhh");
 
 var url = location.href;
 
@@ -48,8 +38,10 @@ if(index === 0) {
         if (!newMessage) {
             // Wait one minute before refreshing the site
             setTimeout(function () {
+                console.log("That was the 10 seconds");
                 location.reload(true);
             }, 10 * 1000)
+            console.log("Waiting 10 seconds before reloading");
         } else {
             var notification = new Notification("There are new messages on the current blackboard forum. Please check them!");
             notification.onclick = function() {
@@ -57,8 +49,9 @@ if(index === 0) {
                 location.href = newMessage;
             }
         }
+    } else {
+        console.log("No unreads to watch");
     }
-}`
-            });
-        }
-    });
+} else {
+    console.log("Cannot watch this page");
+}

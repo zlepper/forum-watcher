@@ -1,15 +1,18 @@
 {
   "manifest_version": 2,
-
   "name": "Forum watcher",
   "description": "This extensions watches a forum page on SDU blackboard, and pops a notification whenever there is new replies",
   "version": "1.0",
-  "background": {
-    "scripts": [
-      "watcher.js"
-    ],
-    "persistent": false
-  },
+  "content_scripts": [
+    {
+      "js": [
+        "watcher.js"
+      ],
+      "matches": [
+        "https://e-learn.sdu.dk/webapps/discussionboard/*"
+      ]
+    }
+  ],
   "permissions": [
     "tabs",
     "https://e-learn.sdu.dk/webapps/discussionboard/*/*"
