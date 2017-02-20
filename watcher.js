@@ -36,15 +36,23 @@ if (index === 0) {
         if (!newMessage) {
             // Wait one minute before refreshing the site
             setTimeout(function () {
+                localStorage.setItem("causedRefresh", "true");
                 location.reload(true);
             }, 10 * 1000);
+            localStorage.removeItem("causedRefresh");
         } else {
-            var notification = new Notification("There are new messages on the current blackboard forum. Please check them!");
-            notification.onclick = function () {
-                window.focus();
-                location.href = newMessage;
-                notification.close();
+            var did = localStorage.getItem("causedRefresh");
+            if (did === 'true') {
+                var notification = new Notification("There are new messages on the current blackboard forum. Please check them!");
+                notification.onclick = function () {
+                    window.focus();
+                    location.href = newMessage;
+                    notification.close();
+                };
+                localStorage.removeItem("causedRefresh");
             }
         }
     }
+
+
 }
